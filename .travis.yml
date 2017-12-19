@@ -8,12 +8,8 @@ env:
     - ANDROID_BUILD_TOOLS_VERSION=27.0.2
     - ANDROID_TAG=google_apis
     - ANDROID_ABI=armeabi-v7a
-    - ADB_INSTALL_TIMEOUT=20 # minutes (2 minutes by default)
+    - ADB_INSTALL_TIMEOUT=10 # minutes (2 minutes by default)
     - ANDROID_EMULATOR_API=27
-
-branches:
-  only:
-  - master
 
 android:
   components:
@@ -29,32 +25,28 @@ android:
         - android-sdk-license-.+
         - '.+'
 
-# Emulator Management: Create, Start and Wait
-before_script:
-  - chmod +x gradlew
-
-before_install:
-- pip install --user codecov
-after_success:
-- codecov
-
 before_install:
   - chmod +x gradlew
   - mkdir "$ANDROID_HOME/licenses" || true
   - echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
   - echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
+  # A solution to avoid failure when using android 27, build-tools-27.0.2
+  - yes | sdkmanager "platforms;android-27"
+
+before_script:
+  # Create and start the emulator.
+  - echo no | android create avd --force -n test -t android-$ANDROID_EMULATOR_API --abi $ANDROID_ABI
+  - emulator -avd test -no-skin -no-audio -no-window &
+  - android-wait-for-emulator
+  - adb shell input keyevent 82 &
 
 notifications:
   email: false
 
 script:
   - ./gradlew assembleRelease
-  - ./gradlew build jacocoTestReport assembleAndroidTest
-  - echo no | android create avd --force -n test -t android-$ANDROID_EMULATOR_API --abi $ANDROID_ABI
-  - emulator -avd test -no-skin -no-audio -no-window &
-  - android-wait-for-emulator
-  - adb shell setprop dalvik.vm.dexopt-flags v=n,o=v
-  - ./gradlew connectedCheck
+  # :app means the module to test.
+  - ./gradlew :app:createDebugAndroidTestCoverageReport --info --stacktrace
 
 after_success:
 - bash <(curl -s https://codecov.io/bash)
