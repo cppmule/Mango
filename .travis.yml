@@ -9,7 +9,7 @@ env:
     - ANDROID_TAG=google_apis
     - ANDROID_ABI=armeabi-v7a
     - ADB_INSTALL_TIMEOUT=10 # minutes (2 minutes by default)
-    - ANDROID_EMULATOR_API=27
+    - ANDROID_EMULATOR_API=23
 
 android:
   components:
