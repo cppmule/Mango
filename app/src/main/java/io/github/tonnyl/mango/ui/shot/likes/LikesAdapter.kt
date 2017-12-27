@@ -52,7 +52,7 @@ class LikesAdapter(context: Context, list: List<Like>) : RecyclerView.Adapter<Re
         with(viewHolder as LikeViewHolder) {
             GlideLoader.loadAvatar(itemView.avatar, like.user.avatarUrl)
             itemView.name.text = like.user.name
-            itemView.user_name.text = like.user.username
+            itemView.user_name.text = like.user.login
         }
     }
 

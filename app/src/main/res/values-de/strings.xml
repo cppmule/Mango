@@ -40,7 +40,7 @@
     <string name="debuts">POSTS</string>
     <string name="shot_title">%1$s - %2$s</string>
     <!--Main page menus-->
-    <string name="action_main">action_main</string>
+    <string name="action_main">Main</string>
     <string name="action_settings">Einstellungen</string>
     <string name="action_log_out">ausloggen</string>
     <string name="log_out">ausloggen</string>
@@ -54,7 +54,7 @@
     <string name="copied">Kopiert</string>
     <string name="share_to">Teilen mit</string>
     <!--Shot detail menus-->
-    <string name="action_shot">action_shot</string>
+    <string name="action_shot">Arbeiten</string>
     <string name="action_share">Teilen</string>
     <string name="action_open_in_browser">Im Browser öffnen</string>
 
@@ -70,7 +70,7 @@
     <string name="tab_title_shots">Arbeit %1$d</string>
     <string name="tab_title_likes">LIKES %1$d</string>
     <!--User profile menus-->
-    <string name="action_user">action_user</string>
+    <string name="action_user">Benutzer</string>
 
     <!--Settings-->
     <string name="settings">Einstellungen</string>

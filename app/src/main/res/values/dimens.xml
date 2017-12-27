@@ -29,6 +29,8 @@
 
     <dimen name="fab_margin">16dp</dimen>
 
+    <dimen name="app_bar_height">160dp</dimen>
+
     <dimen name="avatar_width_primary">72dp</dimen>
     <dimen name="avatar_height_primary">72dp</dimen>
     <dimen name="avatar_width_secondary">36dp</dimen>
@@ -41,9 +43,5 @@
     <dimen name="add_comment_elevation">8dp</dimen>
     <dimen name="add_comment_text_size">13sp</dimen>
     <dimen name="add_comment_height">48dp</dimen>
-
-    <dimen name="anim_view_dimen_primary">128dp</dimen>
-    <dimen name="anim_view_dimen_secondary">160dp</dimen>
-    <dimen name="anim_view_dimen_tertiary">240dp</dimen>
 
 </resources>

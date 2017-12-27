@@ -20,7 +20,7 @@
  * THE SOFTWARE.
  */
 
-package io.github.tonnyl.mango.ui.main.shots
+package io.github.tonnyl.mango.ui.shots
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -37,10 +37,8 @@ import kotlinx.android.synthetic.main.item_shot.view.*
  * Created by lizhaotailang on 2017/6/29.
  */
 
-class ShotsAdapter(context: Context, list: List<Shot>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ShotsAdapter(private val mContext: Context, private val mList: List<Shot>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var mContext = context
-    private var mList = list
     private var mListener: OnRecyclerViewItemClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {

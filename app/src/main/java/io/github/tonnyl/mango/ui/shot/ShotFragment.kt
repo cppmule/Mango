@@ -164,7 +164,7 @@ class ShotFragment : Fragment(), ShotContract.View {
         }
 
         name.text = shot.user?.name
-        user_name.text = shot.user?.username
+        user_name.text = shot.user?.login
         created_time.text = DateUtils.getRelativeTimeSpanString(shot.createdAt.time, System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS)
 
         button_likes.text = getString(R.string.likes_formatted).format(shot.likesCount)

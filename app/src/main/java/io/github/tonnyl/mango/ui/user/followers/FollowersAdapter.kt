@@ -54,7 +54,7 @@ class FollowersAdapter(context: Context, list: List<Follower>) : RecyclerView.Ad
             GlideLoader.loadAvatar(itemView.avatar, follower.follower.avatarUrl)
 
             itemView.name.text = follower.follower.name
-            itemView.user_name.text = follower.follower.username
+            itemView.user_name.text = follower.follower.login
 
             itemView.bio.text = if (Build.VERSION.SDK_INT >= 24) {
                 Html.fromHtml(follower.follower.bio, Html.FROM_HTML_MODE_LEGACY)

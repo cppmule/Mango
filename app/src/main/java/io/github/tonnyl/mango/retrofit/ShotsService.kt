@@ -43,36 +43,24 @@ interface ShotsService {
      * @param shotId The shot id.
      * @return The [Shot] info.
      */
-    @GET("/v1/shots/{shot_id}")
+    @GET("/v2/shots/{shot_id}")
     fun getShot(@Path("shot_id") shotId: Long): Observable<Response<Shot>>
 
     /**
      * Get a list of shots.
      *
-     * @param list The type of list. Limit the results to a specific type with the following possible values:
-     *             animated, attachments, debuts, playoffs, rebounds, teams.
-     *             Default value is results of any type.
-     * @param timeFrame A period of time to limit the results to with the following possible values:
-     *             week, month, year, ever. Note that the value is ignored when sorting with recent.
-     *             Default value is results from now.
-     * @param date Limit the timeframe to a specific date, week, month, or year.
-     *             Must be in the format of YYYY-MM-DD.
-     * @param sort The sort field with the following possible values: comments, recent, views.
-     *             Default value is results that are sorted by popularity.
      * @param perPage The amount of shot results per page.
+     *
      * @return The [Shot] results.
      */
-    @GET("/v1/shots")
-    fun listShots(@Query("list") list: String?,
-                  @Query("timeframe") timeFrame: String?,
-                  @Query("date") date: String?,
-                  @Query("sort") sort: String?,
-                  @Query("per_page") perPage: Int = ApiConstants.PER_PAGE): Observable<Response<List<Shot>>>
+    @GET("/v2/user/shots")
+    fun listShots(@Query("per_page") perPage: Int = ApiConstants.PER_PAGE): Observable<Response<List<Shot>>>
 
     /**
      * Get a shot list of next page according to the pre-request.
      *
      * @param url The next page url.
+     *
      * @return The shot list.
      */
     @GET
@@ -85,7 +73,7 @@ interface ShotsService {
      *         If likes, the status code of response will be 200,
      *         or it will be 404 (not found).
      */
-    @GET("/v1/shots/{shot_id}/like")
+    @GET("/v2/shots/{shot_id}/like")
     fun checkLikeOfShot(@Path("shot_id") shotId: Long): Observable<Response<Like>>
 
     /**
@@ -95,7 +83,7 @@ interface ShotsService {
      * @param perPage The amount of shot results per page.
      * @return The [Like] results.
      */
-    @GET("/v1/shots/{shot_id}/likes")
+    @GET("/v2/shots/{shot_id}/likes")
     fun listLikesForShot(@Path("shot_id") shotId: Long,
                          @Query("per_page") perPage: Int = ApiConstants.PER_PAGE): Observable<Response<List<Like>>>
 
@@ -114,7 +102,7 @@ interface ShotsService {
      * @param shotId The shot id.
      * @return The [Like] detail. If succeed, the status code of response will be 201 (created).
      */
-    @POST("/v1/shots/{shot_id}/like")
+    @POST("/v2/shots/{shot_id}/like")
     fun likeShot(@Path("shot_id") shotId: Long): Observable<Response<Like>>
 
     /**
@@ -123,7 +111,7 @@ interface ShotsService {
      * @param shotId The shot id.
      * @return The response of request. If succeed, the status code of response will be 204 (no content).
      */
-    @DELETE("/v1/shots/{shot_id}/like")
+    @DELETE("/v2/shots/{shot_id}/like")
     fun unlikeShot(@Path("shot_id") shotId: Long): Observable<Response<Body>>
 
     /**
@@ -133,7 +121,7 @@ interface ShotsService {
      * @param perPage The amount of shot results per page.
      * @return The [Comment] results.
      */
-    @GET("/v1/shots/{shot_id}/comments")
+    @GET("/v2/shots/{shot_id}/comments")
     fun listCommentsForShot(@Path("shot_id") shotId: Long,
                             @Query("per_page") perPage: Int = ApiConstants.PER_PAGE): Observable<Response<List<Comment>>>
 
@@ -161,7 +149,7 @@ interface ShotsService {
      *
      * @return The comment detail. If succeed, the status code of response will be 201 (created).
      */
-    @POST("/v1/shots/{shot_id}/comments")
+    @POST("/v2/shots/{shot_id}/comments")
     fun createComment(@Path("shot_id") shotId: Long,
                       @Query("body") body: String): Observable<Response<Comment>>
 

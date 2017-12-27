@@ -41,7 +41,8 @@ class LikesPresenter(view: LikesContract.View, shot: Shot) : LikesContract.Prese
 
     private val mView = view
     private val mShot = shot
-    private val mCompositeDisposable: CompositeDisposable
+    private val mCompositeDisposable = CompositeDisposable()
+    private val mShotRepository = ShotRepository()
 
     private val mCachedLikes = arrayListOf<Like>()
     private var mNextPageUrl: String? = null
@@ -53,7 +54,6 @@ class LikesPresenter(view: LikesContract.View, shot: Shot) : LikesContract.Prese
 
     init {
         mView.setPresenter(this)
-        mCompositeDisposable = CompositeDisposable()
     }
 
     override fun subscribe() {
@@ -68,7 +68,7 @@ class LikesPresenter(view: LikesContract.View, shot: Shot) : LikesContract.Prese
     override fun loadLikes() {
         mView.setLoadingIndicator(true)
 
-        val disposable = ShotRepository
+        val disposable = mShotRepository
                 .listLikes(mShot.id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -101,7 +101,7 @@ class LikesPresenter(view: LikesContract.View, shot: Shot) : LikesContract.Prese
 
     override fun loadMoreLikes() {
         mNextPageUrl?.let {
-            val disposable = ShotRepository
+            val disposable = mShotRepository
                     .listLikesOfNextPage(it)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

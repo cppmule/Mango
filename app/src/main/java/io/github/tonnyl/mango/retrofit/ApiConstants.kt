@@ -33,7 +33,7 @@ import io.github.tonnyl.mango.BuildConfig
  *   The parameters are listed below:
  *   client_id    - [String] type. Required. The client ID you received from Dribbble when you [registered](https://dribbble.com/account/applications/new).
  *   redirect_uri - [String] type. The URL in your application where users will be sent after authorization.
- *                                 See details about [Redirect URLs](http://developer.dribbble.com/v1/oauth/#redirect-urls).
+ *                                 See details about [Redirect URLs](http://developer.dribbble.com/v2/oauth/#redirect-urls).
  *   scope        - [String] type. A space separated list of scopes.
  *                                 If not provided, scope defaults to the public scope for users that don’t have a valid token for the application.
  *                                 For users who do already have a valid token for the application,
@@ -52,7 +52,7 @@ import io.github.tonnyl.mango.BuildConfig
  *
  * + 3. Use the access token to access the API.
  *   The access token allows you to make requests to the API on a behalf of a user.
- *   ```GET https://api.dribbble.com/v1/user?access_token=...```
+ *   ```GET https://api.dribbble.com/v2/user?access_token=...```
  *
  */
 
@@ -74,7 +74,7 @@ class ApiConstants private constructor() {
         val DRIBBBLE_AUTHORIZE_CALLBACK_URI = "x-mango-oauth-dribbble://callback"
         //val DRIBBBLE_AUTHORIZE_CALLBACK_URI_SCHEMA: String = "x-mango-oauth-dribbble"
         val DRIBBBLE_AUTHORIZE_CALLBACK_URI_HOST = "callback"
-        val DRIBBBLE_AUTHORIZE_SCOPE = "public+write+comment+upload"
+        val DRIBBBLE_AUTHORIZE_SCOPE = "public+upload"
 
         // Amount of images per page
         val PER_PAGE = 20

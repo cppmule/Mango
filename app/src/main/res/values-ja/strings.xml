@@ -40,7 +40,7 @@
     <string name="debuts">デビュー</string>
     <string name="shot_title">%1$s - %2$s</string>
     <!--Main page menus-->
-    <string name="action_main">action_main</string>
+    <string name="action_main">主に</string>
     <string name="action_settings">設定</string>
     <string name="action_log_out">ログアウト</string>
     <string name="log_out">ログアウト</string>
@@ -54,7 +54,7 @@
     <string name="copied">コピーしました</string>
     <string name="share_to">ほかとシェア</string>
     <!--Shot detail menus-->
-    <string name="action_shot">action_shot</string>
+    <string name="action_shot">作品</string>
     <string name="action_share">シェアする</string>
     <string name="action_open_in_browser">ブラウザで開いて</string>
 
@@ -70,7 +70,7 @@
     <string name="tab_title_shots">作品 %1$d</string>
     <string name="tab_title_likes">いいね %1$d</string>
     <!--User profile menus-->
-    <string name="action_user">action_user</string>
+    <string name="action_user">ユーザー</string>
 
     <!--Settings-->
     <string name="settings">設定</string>
@@ -92,7 +92,7 @@
     <string name="feedback">意見</string>
     <string name="feedback_email">marktonymengyi@gmail.com</string>
     <string name="feedback_email_subject">Mango Feedback</string>
-    <string name="feedback_desc">僕と一緒にMangoAPPを作りました。</string>
+    <string name="feedback_desc">僕と一緒にMango APPを作りました。</string>
 
     <!--Image content descriptions-->
     <string name="avatar_desc">画像</string>

@@ -40,7 +40,7 @@
     <string name="debuts">首秀</string>
     <string name="shot_title">%1$s - %2$s</string>
     <!--Main page menus-->
-    <string name="action_main">action_main</string>
+    <string name="action_main">主要</string>
     <string name="action_settings">设置</string>
     <string name="action_log_out">登出</string>
     <string name="log_out">登出</string>
@@ -54,7 +54,7 @@
     <string name="copied">已复制</string>
     <string name="share_to">分享至</string>
     <!--Shot detail menus-->
-    <string name="action_shot">action_shot</string>
+    <string name="action_shot">作品</string>
     <string name="action_share">分享</string>
     <string name="action_open_in_browser">在浏览器中打开</string>
 
@@ -70,7 +70,7 @@
     <string name="tab_title_shots">作品 %1$d</string>
     <string name="tab_title_likes">喜欢 %1$d</string>
     <!--User profile menus-->
-    <string name="action_user">action_user</string>
+    <string name="action_user">用户</string>
 
     <!--Settings-->
     <string name="settings">设置</string>
@@ -92,7 +92,7 @@
     <string name="feedback">反馈</string>
     <string name="feedback_email">marktonymengyi@gmail.com</string>
     <string name="feedback_email_subject">Mango Feedback</string>
-    <string name="feedback_desc">和我一起创作更美好的芒果App吧</string>
+    <string name="feedback_desc">和我一起创作更美好的Mango App吧</string>
 
     <!--Image content descriptions-->
     <string name="avatar_desc">头像</string>

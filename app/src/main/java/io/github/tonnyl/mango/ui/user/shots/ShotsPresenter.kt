@@ -41,6 +41,7 @@ class ShotsPresenter(view: ShotsContract.View, user: User) : ShotsContract.Prese
     private val mView = view
     private val mUser = user
     private val mCompositeDisposable: CompositeDisposable
+    private val mShotsRepository = ShotsRepository()
 
     private var mNextPageUrl: String? = null
 
@@ -66,7 +67,7 @@ class ShotsPresenter(view: ShotsContract.View, user: User) : ShotsContract.Prese
 
     override fun loadShots() {
         mView.setLoadingIndicator(true)
-        val disposable = ShotsRepository.listShotsOfUser(mUser.id)
+        val disposable = mShotsRepository.listShotsOfUser(mUser.id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ response ->
@@ -101,7 +102,7 @@ class ShotsPresenter(view: ShotsContract.View, user: User) : ShotsContract.Prese
 
     override fun loadShotsOfNextPage() {
         mNextPageUrl?.let {
-            val disposable = ShotsRepository.listShotsOfUserOfNextPage(it)
+            val disposable = mShotsRepository.listShotsOfUserOfNextPage(it)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({ response ->

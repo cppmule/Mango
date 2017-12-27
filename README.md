@@ -33,7 +33,7 @@ Open the `Mango/` directory in Android Studio.
 
 ### Get Started
 ```shell
-./gradlew assembleRelease
+./gradlew build
 ```
 
 ### Troubleshooting

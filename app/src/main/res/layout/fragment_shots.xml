@@ -25,7 +25,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.MainActivity">
+    tools:context=".ui.shots.MainActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
@@ -41,50 +41,30 @@
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
-            <LinearLayout
-                android:id="@+id/user_info_layout"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:drawablePadding="@dimen/activity_horizontal_margin"
+                android:drawableStart="@drawable/ic_avatar_placeholder"
+                android:gravity="center_vertical"
+                android:text="@string/app_name"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="17sp"
+                android:textStyle="bold" />
 
-                <ImageView
-                    android:id="@+id/avatar"
-                    android:layout_width="@dimen/avatar_width_secondary"
-                    android:layout_height="@dimen/avatar_height_secondary"
-                    android:layout_gravity="center_vertical"
-                    android:contentDescription="@string/avatar_desc" />
-
-                <TextView
-                    android:id="@+id/user_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="@dimen/activity_horizontal_margin"
-                    android:text="@string/app_name"
-                    android:textColor="@color/colorPrimaryText"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
         </android.support.v7.widget.Toolbar>
 
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tab_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:tabBackground="@color/colorPrimary"
-            app:tabGravity="fill"
-            app:tabIndicatorColor="@color/colorAccent"
-            app:tabSelectedTextColor="@color/colorAccent"
-            app:tabTextColor="@color/colorSecondaryText" />
-
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <include
+        layout="@layout/fragment_simple_list"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 </android.support.design.widget.CoordinatorLayout>

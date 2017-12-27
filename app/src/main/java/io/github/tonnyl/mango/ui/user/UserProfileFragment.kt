@@ -31,14 +31,8 @@ import android.view.*
 import io.github.tonnyl.mango.R
 import io.github.tonnyl.mango.data.User
 import io.github.tonnyl.mango.glide.GlideLoader
-import io.github.tonnyl.mango.ui.user.followers.FollowersActivity
-import io.github.tonnyl.mango.ui.user.followers.FollowersPresenter
-import io.github.tonnyl.mango.ui.user.following.FollowingActivity
-import io.github.tonnyl.mango.ui.user.following.FollowingPresenter
 import kotlinx.android.synthetic.main.fragment_user_profile.*
 import org.jetbrains.anko.browse
-import org.jetbrains.anko.startActivity
-
 
 /**
  * Created by lizhaotailang on 2017/6/28.
@@ -71,18 +65,6 @@ class UserProfileFragment : Fragment(), UserProfileContract.View {
         initViews()
 
         mPresenter.subscribe()
-
-        following.setOnClickListener {
-            context?.startActivity<FollowingActivity>(
-                    FollowingPresenter.EXTRA_USER_ID to mPresenter.getUser().id,
-                    FollowingPresenter.EXTRA_FOLLOWING_TITLE to following.text)
-        }
-
-        followers.setOnClickListener {
-            context?.startActivity<FollowersActivity>(
-                    FollowersPresenter.EXTRA_USER_ID to mPresenter.getUser().id,
-                    FollowersPresenter.EXTRA_FOLLOWERS_TITLE to followers.text)
-        }
 
     }
 
@@ -128,39 +110,31 @@ class UserProfileFragment : Fragment(), UserProfileContract.View {
         GlideLoader.loadAvatar(avatar, user.avatarUrl)
 
         user.links.twitter?.let {
-            user_info_twitter.text = it
+            twitterTextView.text = it
         } ?: run {
-            user_info_twitter.visibility = View.GONE
+            twitterTextView.visibility = View.GONE
         }
 
         user.links.web?.let {
-            user_info_web.text = it
+            webTextView.text = it
         } ?: run {
-            user_info_web.visibility = View.GONE
+            webTextView.visibility = View.GONE
         }
 
         user.location?.let {
-            user_info_location.text = it
+            locationTextView.text = it
         } ?: run {
-            user_info_location.visibility = View.GONE
+            locationTextView.visibility = View.GONE
         }
-
-        followers.text = getString(R.string.followers_formatted).format(user.followersCount)
-        following.text = getString(R.string.following_formatted).format(user.followingsCount)
 
         if (Build.VERSION.SDK_INT >= 24) {
-            bio.text = Html.fromHtml(user.bio, Html.FROM_HTML_MODE_LEGACY)
+            bioTextView.text = Html.fromHtml(user.bio, Html.FROM_HTML_MODE_LEGACY)
         } else {
-            bio.text = Html.fromHtml(user.bio)
+            bioTextView.text = Html.fromHtml(user.bio)
         }
 
-        tab_layout.getTabAt(0)?.text = getString(R.string.tab_title_shots).format(user.shotsCount)
-        tab_layout.getTabAt(1)?.text = getString(R.string.tab_title_likes).format(user.likesCount)
-
-        val act = activity as UserProfileActivity
-        act.supportActionBar?.title = user.name
-        act.supportActionBar?.subtitle = user.username
-
+        nameTextView.text = user.name
+        usernameTextView.text = user.login
     }
 
     override fun setFollowing(isFollowing: Boolean) {
@@ -174,19 +148,14 @@ class UserProfileFragment : Fragment(), UserProfileContract.View {
     }
 
     override fun showNetworkError() {
-        Snackbar.make(view_pager, R.string.network_error, Snackbar.LENGTH_SHORT).show()
+        Snackbar.make(avatar, R.string.network_error, Snackbar.LENGTH_SHORT).show()
     }
 
     private fun initViews() {
-
-        val act = activity as UserProfileActivity
-        act.setSupportActionBar(toolbar)
-        act.supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        context?.let { view_pager.adapter = UserProfilePagerAdapter(it, mPresenter.getUser(), childFragmentManager) }
-        view_pager.offscreenPageLimit = 2
-
-        tab_layout.setupWithViewPager(view_pager)
+        with(activity as UserProfileActivity) {
+            setSupportActionBar(toolbar)
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        }
     }
 
 }

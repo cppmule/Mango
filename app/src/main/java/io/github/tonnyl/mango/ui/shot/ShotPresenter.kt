@@ -41,6 +41,7 @@ class ShotPresenter(view: ShotContract.View, shotId: Long) : ShotContract.Presen
     private val mCompositeDisposable: CompositeDisposable
     private var mIsLikeChecked = false
     private var mIsLike = false
+    private val mShotRepository = ShotRepository()
 
     private var mIsDeepLink = true
     private var mShot: Shot? = null
@@ -63,7 +64,7 @@ class ShotPresenter(view: ShotContract.View, shotId: Long) : ShotContract.Presen
 
     override fun subscribe() {
         if (mIsDeepLink && mShot == null) {
-            val disposable = ShotRepository.getShot(mShotId)
+            val disposable = mShotRepository.getShot(mShotId)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({ shot ->
@@ -82,7 +83,7 @@ class ShotPresenter(view: ShotContract.View, shotId: Long) : ShotContract.Presen
             }
         }
 
-        val disposable = ShotRepository.checkLike(mShotId)
+        val disposable = mShotRepository.checkLike(mShotId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ response ->
@@ -101,7 +102,7 @@ class ShotPresenter(view: ShotContract.View, shotId: Long) : ShotContract.Presen
 
     override fun toggleLike() {
         if (mIsLike) {
-            val disposable = ShotRepository
+            val disposable = mShotRepository
                     .unlikeShot(mShotId)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -118,7 +119,7 @@ class ShotPresenter(view: ShotContract.View, shotId: Long) : ShotContract.Presen
                     })
             mCompositeDisposable.add(disposable)
         } else {
-            val disposable = ShotRepository.likeShot(mShotId)
+            val disposable = mShotRepository.likeShot(mShotId)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({

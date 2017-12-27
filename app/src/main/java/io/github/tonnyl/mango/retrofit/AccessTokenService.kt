@@ -43,7 +43,7 @@ interface AccessTokenService {
      * @param clientSecret Required. The client secret you received from Dribbble when you [registered](https://dribbble.com/account/applications/new).
      * @param code Required The code you received as a response to the pre-request.
      * @param redirectUri The URL in your application where users will be sent after authorization.
-     *                    See details about [Redirect URLs](http://developer.dribbble.com/v1/oauth/#redirect-urls).
+     *                    See details about [Redirect URLs](http://developer.dribbble.com/v2/oauth/#redirect-urls).
      * @return The [AccessToken] result.
      */
     @POST

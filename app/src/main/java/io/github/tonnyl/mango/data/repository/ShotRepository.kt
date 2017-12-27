@@ -36,7 +36,7 @@ import retrofit2.http.Body
  * Created by lizhaotailang on 2017/7/3.
  */
 
-object ShotRepository {
+class ShotRepository {
 
     private val mShotsService = RetrofitClient.createService(ShotsService::class.java, AccessTokenManager.accessToken)
 

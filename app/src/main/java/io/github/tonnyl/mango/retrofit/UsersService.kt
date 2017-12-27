@@ -49,7 +49,7 @@ interface UsersService {
      *         You have been blocked from following this member at their request.
      *         You have reached the maximum number of follows allowed.
      */
-    @PUT("/v1/users/{user_id}/follow")
+    @PUT("/v2/users/{user_id}/follow")
     fun follow(@Path("user_id") userId: Long): Observable<Response<Body>>
 
     /**
@@ -59,7 +59,7 @@ interface UsersService {
      * @param userId The user id.
      * @return The unfollow result. If succeed, the status code of response will be 204 (no content).
      */
-    @DELETE("/v1/users/{user_id}/follow")
+    @DELETE("/v2/users/{user_id}/follow")
     fun unfollow(@Path("user_id") userId: Long): Observable<Response<Body>>
 
     /**
@@ -69,7 +69,7 @@ interface UsersService {
      * @param perPage The amount of shots per page.
      * @return The list of [Shot] results.
      */
-    @GET("/v1/users/{user_id}/shots")
+    @GET("/v2/users/{user_id}/shots")
     fun listShotsOfUser(@Path("user_id") userId: Long,
                         @Query("per_page") perPage: Int = ApiConstants.PER_PAGE): Observable<Response<List<Shot>>>
 
@@ -89,7 +89,7 @@ interface UsersService {
      * @param perPage The amount of shots per page.
      * @return The list of [Shot] results.
      */
-    @GET("/v1/users/{user_id}/likes")
+    @GET("/v2/users/{user_id}/likes")
     fun listLikedShotsOfUser(@Path("user_id") userId: Long,
                              @Query("per_page") perPage: Int = ApiConstants.PER_PAGE): Observable<Response<List<LikedShot>>>
 
@@ -109,7 +109,7 @@ interface UsersService {
      * @param per_page The amount of [Follower] results per page.
      * @return The list of [Follower] results.
      */
-    @GET("/v1/users/{user_id}/followers")
+    @GET("/v2/users/{user_id}/followers")
     fun listFollowersOfUser(@Path("user_id") userId: Long,
                             @Query("per_page") per_page: Int): Observable<Response<List<Follower>>>
 
@@ -129,7 +129,7 @@ interface UsersService {
      * @param per_page The amount of [Followee] results per page.
      * @return The list of [Followee] results.
      */
-    @GET("/v1/users/{user_id}/following")
+    @GET("/v2/users/{user_id}/following")
     fun listFollowingOfUser(@Path("user_id") userId: Long,
                             @Query("per_page") per_page: Int): Observable<Response<List<Followee>>>
 

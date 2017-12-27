@@ -23,9 +23,11 @@
 package io.github.tonnyl.mango.retrofit
 
 import android.content.Context
+import io.github.tonnyl.mango.BuildConfig
 import io.github.tonnyl.mango.data.AccessToken
 import okhttp3.Cache
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -40,7 +42,7 @@ import retrofit2.converter.gson.GsonConverterFactory
  * to learn how the API may be used.
  *
  * See [http://developer.dribbble.com/] for the complete Dribbble developer guide and
- * [http://developer.dribbble.com/v1/] for the detailed API docs.
+ * [http://developer.dribbble.com/v2/] for the detailed API docs.
  *
  * Written by gejiaheng, modified by lizhaotailang.
  * See [See https://github.com/gejiaheng/Protein/blob/master/app/src/main/java/com/ge/protein/data/api/ServiceGenerator.java].
@@ -73,7 +75,7 @@ object RetrofitClient {
                 val original = chain.request()
 
                 // Custom the request header.
-                // See [http://developer.dribbble.com/v1/#authentication] for more information.
+                // See [http://developer.dribbble.com/v2/#authentication] for more information.
                 val requestBuilder = original.newBuilder()
                         .header("Accept", "application/json")
                         .header("Authorization", "Bearer" + " " + mLastToken)
@@ -81,6 +83,13 @@ object RetrofitClient {
                 val request = requestBuilder.build()
                 chain.proceed(request)
             }.cache(cache)
+
+            if (BuildConfig.DEBUG) {
+                val logging = HttpLoggingInterceptor().apply {
+                    level = HttpLoggingInterceptor.Level.BODY
+                }
+                httpClientBuilder.addInterceptor(logging)
+            }
 
             // Set the corresponding convert factory and call adapter factory.
             val retrofitBuilder = Retrofit.Builder()

@@ -23,10 +23,13 @@
 package io.github.tonnyl.mango.glide
 
 import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.support.v7.graphics.Palette
 import android.widget.ImageView
+import android.widget.TextView
 import com.bumptech.glide.Priority
 import com.bumptech.glide.request.target.BitmapImageViewTarget
+import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
 import io.github.tonnyl.mango.R
 
@@ -51,6 +54,26 @@ object GlideLoader {
                 .circleCrop()
                 .error(R.drawable.ic_avatar_placeholder)
                 .into(imageView)
+    }
+
+    /**
+     * Load the avatar of the logged-in user(On the home screen).
+     *
+     * @param textView Load the avatar image to the [textView]'s left drawable.
+     * @param url The url of image.
+     */
+    fun loadAvatar(textView: TextView, url: String?) {
+        GlideApp.with(textView.context)
+                .asBitmap()
+                .placeholder(R.drawable.ic_avatar_placeholder)
+                .load(url)
+                .circleCrop()
+                .error(R.drawable.ic_avatar_placeholder)
+                .into(object : SimpleTarget<Bitmap>(100, 100) {
+                    override fun onResourceReady(resource: Bitmap?, transition: Transition<in Bitmap>?) {
+                        textView.setCompoundDrawablesWithIntrinsicBounds(BitmapDrawable(textView.context.resources, resource), null, null, null)
+                    }
+                })
     }
 
     /**

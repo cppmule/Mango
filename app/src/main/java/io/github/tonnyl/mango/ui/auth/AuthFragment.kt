@@ -40,7 +40,7 @@ import com.google.gson.Gson
 import io.github.tonnyl.mango.R
 import io.github.tonnyl.mango.data.AccessToken
 import io.github.tonnyl.mango.retrofit.ApiConstants
-import io.github.tonnyl.mango.ui.main.MainActivity
+import io.github.tonnyl.mango.ui.shots.MainActivity
 import io.github.tonnyl.mango.util.Constants
 import kotlinx.android.synthetic.main.fragment_auth.*
 import org.jetbrains.anko.clearTask

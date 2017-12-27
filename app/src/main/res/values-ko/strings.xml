@@ -40,7 +40,7 @@
     <string name="debuts">처음 나타나다.</string>
     <string name="shot_title">%1$s - %2$s</string>
     <!--Main page menus-->
-    <string name="action_main">action_main</string>
+    <string name="action_main">주로</string>
     <string name="action_settings">설치</string>
     <string name="action_log_out">내보내다</string>
     <string name="log_out">내보내다</string>
@@ -54,7 +54,7 @@
     <string name="copied">복사 되었다.</string>
     <string name="share_to">나누다</string>
     <!--Shot detail menus-->
-    <string name="action_shot">action_shot</string>
+    <string name="action_shot">작품</string>
     <string name="action_share">나누다</string>
     <string name="action_open_in_browser">웹 브라우저를 엽니다.</string>
 
@@ -70,7 +70,7 @@
     <string name="tab_title_shots">작품 %1$d</string>
     <string name="tab_title_likes">좋아한다.%1$d</string>
     <!--User profile menus-->
-    <string name="action_user">action_user</string>
+    <string name="action_user">사용자</string>
 
     <!--Settings-->
     <string name="settings">설치</string>

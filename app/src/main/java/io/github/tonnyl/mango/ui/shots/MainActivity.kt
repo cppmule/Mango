@@ -20,38 +20,37 @@
  * THE SOFTWARE.
  */
 
-package io.github.tonnyl.mango.ui.main
+package io.github.tonnyl.mango.ui.shots
 
-import io.github.tonnyl.mango.data.User
-import io.github.tonnyl.mango.mvp.BasePresenter
-import io.github.tonnyl.mango.mvp.BaseView
+import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
+import io.github.tonnyl.mango.R
+import io.github.tonnyl.mango.util.AccessTokenManager
 
 /**
- * Created by lizhaotailang on 2017/6/28.
- *
- * This specifies the contract between the view and the presenter.
+ * Show the homepage view.
  */
-interface MainContract {
+class MainActivity : AppCompatActivity() {
 
-    interface View: BaseView<Presenter> {
+    private lateinit var mainFragment: ShotsFragment
 
-        fun initViews()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.container)
 
-        fun showAuthUserInfo(user: User)
+        mainFragment = ShotsFragment.newInstance()
 
-        fun disableShortcuts()
+        if (AccessTokenManager.accessToken == null) {
+            AccessTokenManager.init(this)
+        }
 
-        fun navigateToLogin()
+        if (!mainFragment.isAdded) {
+            supportFragmentManager.beginTransaction()
+                    .add(R.id.container, mainFragment, ShotsFragment::class.java.simpleName)
+                    .commit()
+        }
 
-    }
-
-    interface Presenter: BasePresenter {
-
-        fun fetchUser()
-
-        fun logoutUser()
-
-        fun getUser(): User?
+        ShotsPresenter(mainFragment)
 
     }
 

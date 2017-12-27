@@ -20,47 +20,57 @@
  * THE SOFTWARE.
  */
 
-package io.github.tonnyl.mango.database
+package io.github.tonnyl.mango.ui.shots
 
-import android.arch.persistence.room.Room
-import android.content.Context
-import android.util.Log
-import java.util.concurrent.atomic.AtomicBoolean
-
+import io.github.tonnyl.mango.data.Shot
+import io.github.tonnyl.mango.data.User
+import io.github.tonnyl.mango.mvp.BasePresenter
+import io.github.tonnyl.mango.mvp.BaseView
 
 /**
- * Created by lizhaotailang on 2017/6/28.
+ * Created by lizhaotailang on 2017/6/29.
+ *
+ * This specifies the contract between the view and the presenter.
  */
 
-object DatabaseCreator {
+interface ShotsContract {
 
-    private var mDatabase: AppDatabase? = null
+    interface View: BaseView<Presenter> {
 
-    private var mInitializing: AtomicBoolean = AtomicBoolean(true)
-    private var mIsDbCreated: AtomicBoolean = AtomicBoolean(false)
+        fun initViews()
 
-    fun createDb(context: Context) {
-        Log.d("DatabaseCreator", "Creating DB from " + Thread.currentThread().name)
+        fun setLoadingIndicator(loading: Boolean)
 
-        if (!mInitializing.compareAndSet(true, false)) {
-            return
-        }
+        fun showResults(results: List<Shot>)
 
-        Thread(Runnable {
-            mDatabase = Room.databaseBuilder(context.applicationContext, AppDatabase::class.java, AppDatabase.DATABASE_NAME)
-                    .build()
-            mIsDbCreated.set(true)
+        fun notifyDataAllRemoved(size: Int)
 
-        }).start()
+        fun notifyDataAdded(startPosition: Int, size: Int)
+
+        fun showNetworkError()
+
+        fun setEmptyContentVisibility(visible: Boolean)
+
+        fun showAuthUserInfo(user: User)
+
+        fun disableShortcuts()
+
+        fun navigateToLogin()
 
     }
 
-    fun isDatabaseCreated(): Boolean {
-        return mIsDbCreated.get()
-    }
+    interface Presenter: BasePresenter {
 
-    fun getDatabase(): AppDatabase? {
-        return mDatabase
+        fun listShots()
+
+        fun listMoreShots()
+
+        fun fetchUser()
+
+        fun logoutUser()
+
+        fun getUser(): User?
+
     }
 
 }

@@ -43,7 +43,7 @@ interface UserService {
      *
      * @return The [User] detail.
      */
-    @GET("/v1/user")
+    @GET("/v2/user")
     fun getAuthenticatedUser(): Observable<User>
 
     /**
@@ -54,7 +54,7 @@ interface UserService {
      *         If you are following the user, the status code of response will be 204 (no content),
      *         or it will be 404 (not found).
      */
-    @GET("/v1/user/following/{user_id}")
+    @GET("/v2/user/following/{user_id}")
     fun checkFollowing(@Path("user_id") userId: Long): Observable<Response<Body>>
 
     /**
@@ -65,7 +65,7 @@ interface UserService {
      * @param per_page The amount of shot results per page.
      * @return The [Shot] results.
      */
-    @GET("/v1/user/following/shots")
+    @GET("/v2/user/following/shots")
     fun listFollowingShots(@Query("per_page") per_page: Int): Observable<Response<List<Shot>>>
 
 }

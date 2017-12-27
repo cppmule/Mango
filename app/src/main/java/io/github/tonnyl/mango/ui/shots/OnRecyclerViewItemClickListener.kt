@@ -20,7 +20,7 @@
  * THE SOFTWARE.
  */
 
-package io.github.tonnyl.mango.ui.main.shots
+package io.github.tonnyl.mango.ui.shots
 
 import android.view.View
 

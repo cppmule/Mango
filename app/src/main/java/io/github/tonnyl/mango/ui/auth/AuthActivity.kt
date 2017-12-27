@@ -28,7 +28,7 @@ import android.preference.PreferenceManager
 import android.support.v7.app.AppCompatActivity
 import io.github.tonnyl.mango.R
 import io.github.tonnyl.mango.data.repository.AuthUserRepository
-import io.github.tonnyl.mango.ui.main.MainActivity
+import io.github.tonnyl.mango.ui.shots.MainActivity
 import io.github.tonnyl.mango.util.Constants
 
 /**

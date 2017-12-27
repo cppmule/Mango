@@ -40,6 +40,7 @@ class LikedShotsPresenter(view: LikedShotsContract.View, userId: Long) : LikedSh
     private val mView = view
     private val mUserId = userId
     private val mCompositeDisposable: CompositeDisposable
+    private val mShotsRepository = ShotsRepository()
 
     private var mNextPageUrl: String? = null
     private val mCachedLikedShots = arrayListOf<LikedShot>()
@@ -59,7 +60,7 @@ class LikedShotsPresenter(view: LikedShotsContract.View, userId: Long) : LikedSh
 
     override fun loadLikedShots() {
         mView.setLoadingIndicator(true)
-        val disposable = ShotsRepository.listLikedShotsOfUser(mUserId)
+        val disposable = mShotsRepository.listLikedShotsOfUser(mUserId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ response ->
@@ -91,7 +92,7 @@ class LikedShotsPresenter(view: LikedShotsContract.View, userId: Long) : LikedSh
 
     override fun loadMoreLikedShots() {
         mNextPageUrl?.let {
-            val disposable = ShotsRepository.listLikedShotOfNextPage(it)
+            val disposable = mShotsRepository.listLikedShotOfNextPage(it)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({ response ->

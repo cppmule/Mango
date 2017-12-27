@@ -45,6 +45,7 @@ class CommentsPresenter(view: CommentsContract.View, shot: Shot) : CommentsContr
     private val mView = view
     private val mShot = shot
     private var mCompositeDisposable: CompositeDisposable
+    private val mShotRepository = ShotRepository()
 
     private val mCachedComments = arrayListOf<Comment>()
     private var mNextPageUrl: String? = null
@@ -81,7 +82,7 @@ class CommentsPresenter(view: CommentsContract.View, shot: Shot) : CommentsContr
     }
 
     override fun createComment(body: String) {
-        val disposable = ShotRepository
+        val disposable = mShotRepository
                 .createComment(mShot.id, body)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -105,7 +106,7 @@ class CommentsPresenter(view: CommentsContract.View, shot: Shot) : CommentsContr
     override fun loadComments() {
         mView.setLoadingIndicator(true)
 
-        val disposable = ShotRepository
+        val disposable = mShotRepository
                 .listComments(mShot.id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -138,7 +139,7 @@ class CommentsPresenter(view: CommentsContract.View, shot: Shot) : CommentsContr
 
     override fun loadMoreComments() {
         mNextPageUrl?.let {
-            val disposable = ShotRepository
+            val disposable = mShotRepository
                     .listCommentsOfNextPage(it)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
